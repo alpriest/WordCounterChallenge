@@ -8,6 +8,19 @@ namespace WordCounterTests
 	public class WordCounterFixture
 	{
 		[Test]
+		public void IsCaseInsensitive()
+		{
+			// Arrange
+			var wc = new WordCounter();
+
+			// Act
+			wc.CountWords("single SINGLE sinGLE");
+
+			// Assert
+			Assert.That(wc.Counts.Single(w => w.Key == "single").Value, Is.EqualTo(3));
+		}
+
+		[Test]
 		public void ReturnsOneWhenOnlyOneWord()
 		{
 			// Arrange

@@ -5,7 +5,7 @@ namespace WordCounterChallenge
 {
 	public class WordCounter : IWordCounter
 	{
-		private readonly Regex _splitOnWordBoundaries = new Regex(@"([\w-])+");
+		private readonly Regex _splitOnWordBoundaries = new Regex(@"([\w-])+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 		public Dictionary<string, int> Counts { get; private set; }
 
@@ -26,6 +26,8 @@ namespace WordCounterChallenge
 
 		private void RecordSingleMatchFound(string m)
 		{
+			m = m.ToLowerInvariant();
+
 			if (!Counts.ContainsKey(m))
 			{
 				Counts.Add(m, 0);
