@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace WordCounterChallenge
 {
@@ -21,9 +22,9 @@ namespace WordCounterChallenge
 				manager.Execute();
 			}
 
-			foreach (var word in wordCounter.Counts.Keys)
+			foreach (var word in wordCounter.Counts.OrderByDescending(x => x.Value))
 			{
-				Console.WriteLine("{0} : {1}", word, wordCounter.Counts[word]);
+				Console.WriteLine("{0} : {1}", word.Key, wordCounter.Counts[word.Key]);
 			}
 
 			Console.ReadLine();
